@@ -1,4 +1,38 @@
-##Starting up the SDK
+##Starting up the Android nGage SDK
+
+1. Get the the latest SDK and extract the zip. Here you will find:
+
+	nGage- android resource project and includes the ngageSDK.jar  library
+	SampleApp - Sample SDK project 
+
+
+2. Add nGage resource to the project: -  Since Android does not allow packing resources directly into a library file you must add the nGage Android project. In eclipse, Import 'nGage' project from the SDK zip file. Go to your apps Project Properties and select Android menu item on left. On the right you will see a 'Library' section. Select the 'Add' button and find the android project 'nGage'. 
+
+Note: Make sure the nGage project has a Target Android Version of 3.2 or higher. Minimum Android version can be as low as 2.1.
+
+
+3. In your apps Manifest file add the lines inside the <application> tag:
+```Java
+ <application …>
+	…
+
+	 <service android:name="org.openudid.OpenUDID_service">
+			 <intent-filter>
+				<action android:name="org.openudid.GETUDID"/>
+			</intent-filter>
+	</service>
+
+      <activity android:screenOrientation="sensorLandscape" android:configChanges="keyboardHidden|orientation" android:name="com.tinidream.ngage.nGageActivity"/>
+	…
+</application>
+```
+
+
+Also in the Manifest, add attribute android:launchMode="singleTask" to your apps starting activity tag. 
+For example, you will have something like <activity android:name="com.company.appname.startingActivity" … android:launchMode="singleTask"/>
+
+
+
 Call the **onCreate** function with your app's Activity and your app's AppEngage API Key. You can find your SDK Key on the our dashboard once you have setup a company account and created an app.
 
 ```Java
